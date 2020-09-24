@@ -11,18 +11,27 @@ Q3 = ["What type of aircraft typically has no engine?",
       "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "d", False, 3]
 # Create a dictionary containing all question dictionaries
 QuestionBank = dict({0: Q1, 1: Q2, 2: Q3})
+
+
 # Random Selector
-
-
 def randomQuestion():
     Qlist = list(QuestionBank)
-    AskList = sample(Qlist, len(Qlist))
-    print(AskList)
-    Ask1 = AskList[0]
-    print(Ask1)
+    global RandAskList
+    RandAskList = sample(Qlist, len(Qlist))
 
 
-randomQuestion()
+def Quiz():
+    # Make a Random list from Question bank.
+    randomQuestion()
+    # Initialize the Sentry
+    finishedQuestions = 0
+    while finishedQuestions < len(RandAskList):
+        print(RandAskList)
+        finishedQuestions += 1
+
+
+Quiz()
+
 
 # Create a Input Validator Function to:
 # --Try to convert to Int, if this passes, then fails validation, Throw a custom error message and ask to try again, do not subtract from guess
