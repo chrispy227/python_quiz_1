@@ -23,10 +23,19 @@ def randomQuestion():
 def Quiz():
     # Make a Random list from Question bank.
     randomQuestion()
+    # WAys to assign values to multiple variables at once
+    # [Ask1, Ask2, Ask3] = RandAskList[:3]
+    # print(Ask1)
+    # print(Ask2)
+    # print(Ask3)
+    # depths = [[] for i in range(len(RandAskList))] # Creates A List of Empty Lists as long as the mother list. 3 here for now
+
     # Initialize the Sentry
     finishedQuestions = 0
+
     while finishedQuestions < len(RandAskList):
-        print(RandAskList)
+        print(QuestionBank[RandAskList[finishedQuestions]][0])
+        print(QuestionBank[RandAskList[finishedQuestions]][1])
         finishedQuestions += 1
 
 
