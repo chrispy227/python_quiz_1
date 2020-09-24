@@ -17,6 +17,7 @@ QuestionBank = dict({0: Q1, 1: Q2, 2: Q3})
 def randomQuestion():
     Qlist = list(QuestionBank)
     global RandAskList
+    # This is only for question selection and cannot double index to the question lists
     RandAskList = sample(Qlist, len(Qlist))
 
 
@@ -32,11 +33,14 @@ def Quiz():
 
     # Initialize the Sentry
     finishedQuestions = 0
-
-    while finishedQuestions < len(RandAskList):
-        print(QuestionBank[RandAskList[finishedQuestions]][0])
-        print(QuestionBank[RandAskList[finishedQuestions]][1])
-        finishedQuestions += 1
+    print(RandAskList[1])
+    # while finishedQuestions < len(RandAskList):
+    #     print(QuestionBank[RandAskList[finishedQuestions]][0])
+    #     print(QuestionBank[RandAskList[finishedQuestions]][1])
+    #     guess = input("Please enter the letter choice for your answer: ")
+    #     if guess == (RandAskList[0][2]):
+    #         pass
+    #     finishedQuestions += 1
 
 
 Quiz()
