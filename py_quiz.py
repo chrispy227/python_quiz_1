@@ -11,12 +11,12 @@ Q3 = ["What type of aircraft typically has no engine?",
 # Create a dictionary containing all question dictionaries
 QuestionBank = dict({0: Q1, 1: Q2, 2: Q3})
 
-
 # Random Selector
+
+
 def randomQuestion():
     # Convert QuestionBank Dictionary to a List
     Qlist = list(QuestionBank)
-    # Make RandAskList a global variable
     global RandAskList
     # Creates a random ordered list with integers as values to be used to pick questions in another function
     RandAskList = sample(Qlist, len(Qlist))
@@ -26,10 +26,6 @@ def randomQuestion():
 # Create a Input Validator Function to:
 # --Try to convert to Int, if this passes, then fails validation, Throw a custom error message and ask to try again, do not subtract from guess
 # --If Conversion to Int fails, then make lowercase String and strip leading and trailing edge whitespaces
-def validator():
-    if guess in ["a", "b", "c", "d"]:
-        valdGuess = guess.strip().lower()
-        print(valdGuess)
 
 
 def Quiz():
@@ -37,17 +33,23 @@ def Quiz():
     randomQuestion()
     # Initialize the Sentry
     finishedQuestions = 0
+    Score = 0
+    scoreDenominator = "/{}"
     while finishedQuestions < len(RandAskList):
         keyIndex = RandAskList[finishedQuestions]
         correctKey = QuestionBank[keyIndex][2]
         print(QuestionBank[RandAskList[finishedQuestions]][0])
         print(QuestionBank[RandAskList[finishedQuestions]][1])
-        global guess
         guess = input("Please enter the letter choice for your answer: ")
-        while guess != None:
-            validator()
-        if guess == (correctKey):
-            print("YOU WIN MFER!!!!")
+        valdGuess = guess.lower().strip()
+        while valdGuess:
+            if valdGuess in ["a", "b", "c", "d"]:
+                print(valdGuess)
+            if valdGuess == (correctKey):
+                print("YOU WIN MFER!!!!")
+                Score += 1
+                valdGuess = None
+                print(str(Score) + scoreDenominator.format(len(RandAskList)))
 
         finishedQuestions += 1
 
@@ -62,9 +64,6 @@ Quiz()
 
 # Create Score Function to check range length, count Correct Boolean True values, and Make a Percentage of Correct/Total Questions.
 
-# Create Function to Ask Questions from Array, displaying the question, answer choices only.
-# -Use random number function to pull random question index
-# -Do not allow repeats: Create an Array of Indexes already used before displaying a question
 # --Use Validator Function on each question answer input
 # ---Use comparison Function on each validated input to compare to current Question ANswer Key
 # ASk play again after all questions in range have been asked
