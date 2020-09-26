@@ -3,13 +3,15 @@ from random import sample
 
 # List Layout: {[0]Question:"", [1]Choices:"", [2]Answer:"", [3]Correct:Boolean, [4]Guesses: int(3)}
 Q1 = ["What type of aircraft is a Helicopter?",
-      "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "b", False, 3]
+      "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "b", False]
 Q2 = ["What type of aircraft is a Plane?",
-      "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "a", False, 3]
+      "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "a", False]
 Q3 = ["What type of aircraft typically has no engine?",
-      "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "d", False, 3]
+      "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "d", False]
+Q4 = ["What type of aircraft is reliant on wind currents for direction control?",
+      "A.) Fixed Wing\nB.) Rotary Wing\nC.) Hot Air Ballon\nD.) Glider", "c", False]
 # Create a dictionary containing all question dictionaries
-QuestionBank = dict({0: Q1, 1: Q2, 2: Q3})
+QuestionBank = dict({0: Q1, 1: Q2, 2: Q3, 3: Q4})
 
 
 def Quiz():
@@ -38,7 +40,8 @@ def Quiz():
     finishedQuestions = 0
     Score = 0
     scoreDenominator = "/{}"
-    while finishedQuestions < len(RandAskList):
+    numQuestions = len(QuestionBank)
+    while finishedQuestions < numQuestions:
         keyIndex = RandAskList[finishedQuestions]
         correctKey = QuestionBank[keyIndex][2]
         print(QuestionBank[RandAskList[finishedQuestions]][0])
@@ -46,26 +49,28 @@ def Quiz():
         valdGuess = validateInput()
         while valdGuess:
             if valdGuess == (correctKey):
-                print("YOU WIN MFER!!!!")
                 Score += 1
                 valdGuess = None
-                print(str(Score) + scoreDenominator.format(len(RandAskList)))
             else:
                 print("Sorry, that is Wrong.")
-                continue
+                valdGuess = None
+                break
         finishedQuestions += 1
+        if finishedQuestions == numQuestions:
+            if Score == numQuestions:
+                print("YOU WIN WITH A PERFECT SCORE!!!!")
+            else:
+                print("You Scored: ")
+            print(str(Score) + scoreDenominator.format(numQuestions))
 
 
 Quiz()
 
-# Create function to Compare validated String value to Current Question ANSWER KEY
-# -IF passes, Change Correct Boolean to TRUE
-# -Allow next Question to be displayed to USer
-# ---IF Fails comparison, subtract 1 from current question GUESS variable, throw Error: "Try Again: "
-# ---repeat till GUESS = 0 or answered correctly
 
-# Create Score Function to check range length, count Correct Boolean True values, and Make a Percentage of Correct/Total Questions.
 
-# --Use Validator Function on each question answer input
-# ---Use comparison Function on each validated input to compare to current Question ANswer Key
-# ASk play again after all questions in range have been asked
+
+
+
+
+
+
