@@ -43,8 +43,8 @@ def quiz():
     while finishedQuestions < numQuestions:
         keyIndex = RandAskList[finishedQuestions]
         correctKey = QuestionBank[keyIndex][2]
-        print(QuestionBank[RandAskList[finishedQuestions]][0])
-        print(QuestionBank[RandAskList[finishedQuestions]][1])
+        print(QuestionBank[keyIndex][0])
+        print(QuestionBank[keyIndex][1])
         valdGuess = validate_input()
         while valdGuess:
             if valdGuess == (correctKey):
@@ -65,12 +65,3 @@ def quiz():
 
 
 quiz()
-
-
-
-
-
-
-
-
-
