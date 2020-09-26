@@ -11,26 +11,29 @@ Q3 = ["What type of aircraft typically has no engine?",
 # Create a dictionary containing all question dictionaries
 QuestionBank = dict({0: Q1, 1: Q2, 2: Q3})
 
-# Random Selector
-
-
-def randomQuestion():
-    # Convert QuestionBank Dictionary to a List
-    Qlist = list(QuestionBank)
-    global RandAskList
-    # Creates a random ordered list with integers as values to be used to pick questions in another function
-    RandAskList = sample(Qlist, len(Qlist))
-    # This is only for question selection and cannot double index to the question lists
-
-
-# Create a Input Validator Function to:
-# --Try to convert to Int, if this passes, then fails validation, Throw a custom error message and ask to try again, do not subtract from guess
-# --If Conversion to Int fails, then make lowercase String and strip leading and trailing edge whitespaces
-
 
 def Quiz():
     # Make a Random list from Question bank.
+    # Random Selector
+    def randomQuestion():
+        # Convert QuestionBank Dictionary to a List
+        Qlist = list(QuestionBank)
+        # Creates a random ordered list with integers as values to be used to pick questions in another function
+        global RandAskList
+        RandAskList = sample(Qlist, len(Qlist))
+        # This is only for question selection and cannot double index to the question lists
     randomQuestion()
+
+
+    def validateInput():
+        while True:
+            value = input("Please enter the letter choice for your answer: ")
+            if value.lower().strip() not in ('a', 'b', 'c', 'd'):
+                print("Sorry, your response must be A, B, C, or D. Please Try Again.")
+                continue
+            else:
+                break
+        return value
     # Initialize the Sentry
     finishedQuestions = 0
     Score = 0
@@ -40,17 +43,16 @@ def Quiz():
         correctKey = QuestionBank[keyIndex][2]
         print(QuestionBank[RandAskList[finishedQuestions]][0])
         print(QuestionBank[RandAskList[finishedQuestions]][1])
-        guess = input("Please enter the letter choice for your answer: ")
-        valdGuess = guess.lower().strip()
+        valdGuess = validateInput()
         while valdGuess:
-            if valdGuess in ["a", "b", "c", "d"]:
-                print(valdGuess)
             if valdGuess == (correctKey):
                 print("YOU WIN MFER!!!!")
                 Score += 1
                 valdGuess = None
                 print(str(Score) + scoreDenominator.format(len(RandAskList)))
-
+            else:
+                print("Sorry, that is Wrong.")
+                continue
         finishedQuestions += 1
 
 
