@@ -20,12 +20,13 @@ class QUIZ:
         while True:
             value = input(
                 "Please enter the letter choice for your answer: " + "\n")
-            if value.lower().strip() not in ('a', 'b', 'c', 'd'):
+            validInput = value.lower().strip()
+            if validInput not in ('a', 'b', 'c', 'd'):
                 print("Sorry, your response must be A, B, C, or D. Please Try Again.\n")
                 continue
             else:
                 break
-        return value
+        return validInput
 
     def run_quiz(self, questions):
         randomized_questions = self.question_randomizer(questions)
